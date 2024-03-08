@@ -6,6 +6,7 @@ import com.liu.pcp.dao.request.LoginRequest;
 import com.liu.pcp.dao.request.RegistRequest;
 import com.liu.pcp.dao.response.Response;
 import com.liu.pcp.mapper.UserMapper;
+import com.liu.pcp.utils.MD5Utils;
 import com.liu.pcp.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
         }
         User newUser = new User();
         user.setUserName(userName);
-        user.setPassword(password);
+        user.setPassword(MD5Utils.inputPassToFormPass(password));
         user.setEmail(email);
         if (userMapper.insert(user)==1){
             return new Response("注册成功", "200");
